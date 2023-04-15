@@ -10,7 +10,7 @@ resource "null_resource" "app" {
         }
 
               inline = [
-                "ansible-pull -U https://github.com/amrutanubhav/robohop-plays.git -e component=mongodb -e env=dev robot-pull.yml"
+                "ansible-pull -U https://github.com/amrutanubhav/robohop-plays.git -e component=${var.COMPONENT} -e env=${var.ENV} APP_VERSION=${var.APP_VERSION} -e robot-pull.yml"
               ]
 
  
