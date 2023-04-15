@@ -25,3 +25,14 @@ resource "aws_instance" "od-ec2" {
     Name = "${var.COMPONENT}-${var.ENV}"
   }
 }
+
+
+
+#creates tags for the instance
+
+resource "aws_ec2_tag" "spot-server-tag" {
+  count       = var.SPOT_INSTANCE_COUNT + var.OD_INSTANCE_COUNT
+  resource_id = element(local.ALL_INSTANCE_IDS, count.index)
+  key         = "Name"
+  value       = "${var.COMPONENT}-${var.ENV}"
+}
