@@ -26,7 +26,7 @@ data "terraform_remote_state" "alb" {
 data "aws_ami" "image" {
   most_recent      = true
   name_regex       = "ansible-jenkins-mc-26-03-23"
-  owners           = self
+  owners           = ["self"]
 }
 
 data "aws_secretsmanager_secret" "secrets" {
