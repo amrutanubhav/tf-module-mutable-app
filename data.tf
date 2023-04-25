@@ -25,7 +25,7 @@ data "terraform_remote_state" "alb" {
 #data for the ami
 data "aws_ami" "image" {
   most_recent      = true
-  name_regex       = "ansible-jenkins-mc-26-03-23"
+  name_regex       = "b52-ansible-dev-21Feb2023"
   owners           = ["self"]
 }
 
