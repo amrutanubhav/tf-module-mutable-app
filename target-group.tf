@@ -1,9 +1,21 @@
 #creates TG
 resource "aws_lb_target_group" "app-tg" {
   name        = "${var.COMPONENT}-${var.ENV}"
-  port        = 8080
+  port        = var.PORT
   protocol    = "HTTP"
   vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
+
+    health_check {
+      
+    path = "/health"
+    healthy_threshold = 2
+    unhealthy_threshold = 2
+    timeout = 4
+    interval = 5
+    eanbled = true
+    
+  }
+
 }
 
 ##Attaching the instances to the created TG
