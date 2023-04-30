@@ -22,6 +22,17 @@ data "terraform_remote_state" "alb" {
   }
 }
 
+#fetch info from remote statefile database backend module
+data "terraform_remote_state" "db" {
+  backend = "s3"
+
+  config = {
+    bucket = "b52-terraform-bucket"
+    key    = "databases/${var.ENV}/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
 #data for the ami
 data "aws_ami" "image" {
   most_recent      = true

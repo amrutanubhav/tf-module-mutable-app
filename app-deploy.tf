@@ -17,7 +17,7 @@ resource "null_resource" "app" {
         }
 
               inline = [
-                "ansible-pull -U https://github.com/amrutanubhav/robohop-plays.git -e component=${var.COMPONENT} -e env=${var.ENV} -e APP_VERSION=${var.APP_VERSION} robot-pull.yml"
+                "ansible-pull -U https://github.com/amrutanubhav/robohop-plays.git -e component=${var.COMPONENT} -e env=${var.ENV} -e APP_VERSION=${var.APP_VERSION} -e MONGO_URL=${data.terraform_remote_state.db.outputs.MONGO_ENDPOINT} robot-pull.yml"
               ]
 
  
