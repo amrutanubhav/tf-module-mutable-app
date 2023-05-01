@@ -6,6 +6,8 @@ resource "aws_spot_instance_request" "spot-ec2" {
   subnet_id                 = element(data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_IDS, count.index)
   vpc_security_group_ids    = [aws_security_group.sg.id]
   wait_for_fulfillment      = true
+  iam_instance_profile    = "b52-FA"
+
 
   tags = {
     Name = "${var.COMPONENT}-${var.ENV}"
@@ -20,6 +22,7 @@ resource "aws_instance" "od-ec2" {
   instance_type           = var.INSTANCE_TYPE
   subnet_id               = element(data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_IDS, count.index)
   vpc_security_group_ids  = [aws_security_group.sg.id]
+  iam_instance_profile    = "b52-FA"
 
   tags = {
     Name = "${var.COMPONENT}-${var.ENV}"
